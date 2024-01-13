@@ -1,14 +1,18 @@
-import sytles from "./menuLink.module.css";
+"use client";
 
-const MenuLink = ({item}) =>{
-    return(
-        <Link href={item.path} className={sytles.container}>
-            <div className={sytles.menu}>
-                {item.icon}
-                {item.title}
-            </div>
+import Link from "next/link";
+import styles from "./menuLink.module.css";
+import { usePathname } from "next/navigation";
+
+const MenuLink = ({ item }) => {
+    const pathname = usePathname();
+
+    return (
+        <Link href={item.path} className={`${styles.container} ${pathname === item.path && styles.active}`}>
+            {item.icon}
+            {item.title}
         </Link>
-    )
+    );
 };
 
 export default MenuLink;
